@@ -183,11 +183,107 @@ Built with modern web technologies
 Want to contribute? Check out our GitHub!
 `);
 
+// ── Coverflow Carousel ──────────────────────────────────────
+(function () {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const caption = document.getElementById('carouselCaption');
+    const dots = document.querySelectorAll('.carousel-dot');
+    if (!slides.length) return;
+
+    const captions = [
+        'Browse your full watchlist with collections, movies, and series',
+        'Search and import from TMDB\'s massive catalog',
+        'Dive into collections with watched progress and notes',
+        'View details, manage lists, and add personal notes',
+    ];
+
+    let current = 0;
+    const total = slides.length;
+
+    function positionClass(offset) {
+        if (offset === 0) return 'active';
+        if (offset === -1) return 'pos-left-1';
+        if (offset === -2) return 'pos-left-2';
+        if (offset === 1) return 'pos-right-1';
+        if (offset === 2) return 'pos-right-2';
+        return 'hidden';
+    }
+
+    function update() {
+        slides.forEach((slide, i) => {
+            slide.className = 'carousel-slide';
+            let offset = i - current;
+            // Wrap around for looping feel
+            if (offset > total / 2) offset -= total;
+            if (offset < -total / 2) offset += total;
+            slide.classList.add(positionClass(offset));
+        });
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+        if (caption) {
+            caption.style.opacity = 0;
+            setTimeout(() => {
+                caption.textContent = captions[current] || '';
+                caption.style.opacity = 1;
+            }, 200);
+        }
+    }
+
+    function goTo(index) {
+        current = ((index % total) + total) % total;
+        update();
+    }
+
+    // Arrow buttons
+    const prev = document.querySelector('.carousel-btn--prev');
+    const next = document.querySelector('.carousel-btn--next');
+    if (prev) prev.addEventListener('click', () => goTo(current - 1));
+    if (next) next.addEventListener('click', () => goTo(current + 1));
+
+    // Dot clicks
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => goTo(parseInt(dot.dataset.index, 10)));
+    });
+
+    // Click on a side slide to bring it to center
+    slides.forEach(slide => {
+        slide.addEventListener('click', () => {
+            const idx = parseInt(slide.dataset.index, 10);
+            if (idx !== current) goTo(idx);
+        });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    // Touch / swipe support
+    let touchStartX = 0;
+    const wrapper = document.querySelector('.carousel-wrapper');
+    if (wrapper) {
+        wrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        wrapper.addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            }
+        }, { passive: true });
+    }
+
+    // Initialize
+    update();
+})();
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize any components that need DOM to be ready
-    console.log('CineSync marketing site loaded successfully!');
-    
+    console.log('ViewVault marketing site loaded successfully!');
+
     // Add loading animation cleanup if needed
     const loader = document.querySelector('.loading');
     if (loader) {

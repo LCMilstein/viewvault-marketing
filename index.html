@@ -117,24 +117,31 @@
     <section id="screenshots" class="screenshots">
         <div class="container">
             <h2>See ViewVault in Action</h2>
-            <div class="screenshot-grid">
-                <div class="screenshot-item">
+        </div>
+        <div class="carousel-wrapper">
+            <div class="carousel-stage">
+                <div class="carousel-slide" data-index="0">
                     <img src="assets/images/screenshot-watchlist.png" alt="ViewVault Watchlist">
-                    <p class="screenshot-description">Browse your full watchlist with collections, movies, and series</p>
                 </div>
-                <div class="screenshot-item">
+                <div class="carousel-slide" data-index="1">
                     <img src="assets/images/screenshot-search.png" alt="ViewVault Search">
-                    <p class="screenshot-description">Search and import from TMDB's massive catalog</p>
                 </div>
-                <div class="screenshot-item">
+                <div class="carousel-slide" data-index="2">
                     <img src="assets/images/screenshot-collection.png" alt="ViewVault Collection">
-                    <p class="screenshot-description">Dive into collections with watched progress and notes</p>
                 </div>
-                <div class="screenshot-item">
+                <div class="carousel-slide" data-index="3">
                     <img src="assets/images/screenshot-detail.png" alt="ViewVault Detail">
-                    <p class="screenshot-description">View details, manage lists, and add personal notes</p>
                 </div>
             </div>
+            <button class="carousel-btn carousel-btn--prev" aria-label="Previous screenshot">&lsaquo;</button>
+            <button class="carousel-btn carousel-btn--next" aria-label="Next screenshot">&rsaquo;</button>
+        </div>
+        <p class="carousel-caption" id="carouselCaption">Browse your full watchlist with collections, movies, and series</p>
+        <div class="carousel-dots" id="carouselDots">
+            <button class="carousel-dot active" data-index="0" aria-label="Screenshot 1"></button>
+            <button class="carousel-dot" data-index="1" aria-label="Screenshot 2"></button>
+            <button class="carousel-dot" data-index="2" aria-label="Screenshot 3"></button>
+            <button class="carousel-dot" data-index="3" aria-label="Screenshot 4"></button>
         </div>
     </section>
 
@@ -143,30 +150,31 @@
         <div class="container">
             <h2>Available on All Your Devices</h2>
             <div class="platform-grid">
-                <div class="platform-card">
+                <a href="https://app.viewvault.app" class="platform-card platform-card--link">
                     <div class="platform-icon">
                         <img src="assets/icons/platform-web.svg" alt="Web">
                     </div>
                     <h3>Web App</h3>
                     <p>Access from any browser with a modern, responsive interface.</p>
-                </div>
-                
-                <div class="platform-card">
+                </a>
+
+                <div class="platform-card platform-card--disabled">
                     <div class="platform-icon">
                         <img src="assets/icons/platform-ios.svg" alt="iOS">
                     </div>
                     <h3>iOS App</h3>
                     <p>Native iOS experience with offline support and push notifications.</p>
+                    <span class="platform-badge">Coming Soon</span>
                 </div>
-                
-                <div class="platform-card">
+
+                <a href="https://github.com/LCMilstein/ViewVault" class="platform-card platform-card--link" target="_blank">
                     <div class="platform-icon">
                         <img src="assets/icons/platform-docker.svg" alt="Docker">
                     </div>
                     <h3>Self-Hosted</h3>
                     <p>Deploy on your own infrastructure with Docker support.</p>
-                </div>
-                
+                </a>
+
                 <!-- API card hidden until docs are ready -->
             </div>
         </div>
