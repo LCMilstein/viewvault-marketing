@@ -63,37 +63,38 @@ if (videoPlaceholder) {
 }
 
 // Mobile menu toggle (basic implementation)
-document.getElementById('mobileMenuToggle').addEventListener('click', function() {
-    const navMenu = document.querySelector('.nav-menu');
-    
-    // Toggle mobile menu visibility
-    if (navMenu.style.display === 'flex') {
-        navMenu.style.display = 'none';
-    } else {
-        navMenu.style.display = 'flex';
-        navMenu.style.flexDirection = 'column';
-        navMenu.style.position = 'absolute';
-        navMenu.style.top = '100%';
-        navMenu.style.left = '0';
-        navMenu.style.right = '0';
-        navMenu.style.background = 'white';
-        navMenu.style.padding = '20px';
-        navMenu.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-        navMenu.style.zIndex = '999';
-    }
-});
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', function() {
+        const navMenu = document.querySelector('.nav-menu');
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(e) {
-    const mobileToggle = document.getElementById('mobileMenuToggle');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (!mobileToggle.contains(e.target) && !navMenu.contains(e.target)) {
-        if (window.innerWidth <= 768) {
+        // Toggle mobile menu visibility
+        if (navMenu.style.display === 'flex') {
             navMenu.style.display = 'none';
+        } else {
+            navMenu.style.display = 'flex';
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '100%';
+            navMenu.style.left = '0';
+            navMenu.style.right = '0';
+            navMenu.style.background = 'white';
+            navMenu.style.padding = '20px';
+            navMenu.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            navMenu.style.zIndex = '999';
         }
-    }
-});
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const navMenu = document.querySelector('.nav-menu');
+        if (!mobileMenuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+            if (window.innerWidth <= 768) {
+                navMenu.style.display = 'none';
+            }
+        }
+    });
+}
 
 // Handle window resize
 window.addEventListener('resize', function() {
@@ -178,7 +179,7 @@ if ('IntersectionObserver' in window) {
 
 // Console easter egg for developers
 console.log(`
-🎬 CineSync Marketing Site
+🎬 ViewVault Marketing Site
 Built with modern web technologies
 Want to contribute? Check out our GitHub!
 `);
